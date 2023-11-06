@@ -95,6 +95,9 @@ def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Pat
         json.dumps(results, indent=4)
     )
 
+    if not all(results.values()):
+        raise CIError(f"At least one package in {repository} is not reproducible.")
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
