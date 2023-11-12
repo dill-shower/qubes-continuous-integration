@@ -17,7 +17,7 @@ class CIError(Exception):
 
 def get_run_cmd(qubes_distribution: QubesDistribution, package, store_dir):
     if qubes_distribution.fullname in ("fedora", "centos-stream"):
-        run_cmd = f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host,-kernel,-build_path --testbed-build-pre 'dnf update; dnf builddep -y --allowerasing {package}' {package}"
+        run_cmd = f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host,-kernel,-build_path --testbed-build-pre 'dnf update -y; dnf builddep -y --allowerasing {package}' {package}"
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
         run_cmd = f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host --testbed-build-pre 'apt-get update; apt-get -y --no-install-recommends build-dep {package}' {package}"
     else:
