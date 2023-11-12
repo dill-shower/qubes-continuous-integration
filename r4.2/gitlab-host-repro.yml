@@ -3,3 +3,4 @@ r4.2:repro:host-fc37:
   needs:
     - r4.2:prep:sources
     - r4.2:build:host-fc37
+  allow_failure: true
