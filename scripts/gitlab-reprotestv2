@@ -101,7 +101,7 @@ def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Pat
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        logger("usage: repository_dir artifacts_dir qubes_distribution")
+        logger.debug("usage: repository_dir artifacts_dir qubes_distribution")
         sys.exit(1)
     try:
         dist = QubesDistribution(sys.argv[3])
@@ -109,5 +109,5 @@ if __name__ == "__main__":
         artifacts_path = Path(sys.argv[2]).expanduser().resolve()
         main(dist, repository_path, artifacts_path)
     except Exception as e:
-        logger(str(e))
+        logger.debug(str(e))
         sys.exit(1)
