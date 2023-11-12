@@ -1,5 +1,7 @@
 FROM quay.io/fedora/fedora:37
-RUN dnf -y update && dnf -y install sudo ca-certificates wget gnupg dnf-plugins-core reprotest && dnf -y clean all
+
+RUN dnf -y install sudo ca-certificates wget gnupg dnf-plugins-core
+
 RUN wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-qubes-4.2-primary https://raw.githubusercontent.com/QubesOS/qubes-builderv2/main/qubesbuilder/plugins/chroot_rpm/keys/RPM-GPG-KEY-qubes-4.2-primary
 RUN printf '\
 [qubes-current]\n\
@@ -17,4 +19,11 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-qubes-4.2-primary\n\
 gpgcheck=1\n\
 repo_gpgcheck = 1\n\
 '\ >> /etc/yum.repos.d/qubes.repo
+
+RUN dnf -y --best --allowerasing update && \
+    dnf config-manager --set-enabled qubes-dom0-current-testing && \
+    rm -f /etc/yum.repos.d/qubes.repo && \
+    dnf -y install reprotest && \
+    dnf -y clean all
+
 RUN useradd -m user
