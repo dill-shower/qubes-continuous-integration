@@ -40,7 +40,7 @@ def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Pat
     environment = {}
     dependencies = []
     if qubes_distribution.fullname in ("fedora", "centos-stream"):
-        packages = (repository / dist.distribution).rglob("*.src.rpm")
+        packages = list((repository / dist.distribution).rglob("*.src.rpm"))
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
         environment.update(
             {
@@ -49,8 +49,8 @@ def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Pat
                 "DEBCONF_NOWARNINGS": "yes",
             }
         )
-        packages = (repository / dist.distribution).rglob("*.dsc")
-        dependencies = (repository / dist.distribution).rglob("*.tar.*")
+        packages = list((repository / dist.distribution).rglob("*.dsc"))
+        dependencies = list((repository / dist.distribution).rglob("*.tar.*"))
     else:
         raise CIError("Unsupported distribution!")
 
