@@ -22,4 +22,7 @@ enabled=0\n\
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-copr-epel-8\n\
 gpgcheck=1\n\
 '\ >> /etc/yum.repos.d/qubes.repo
+
+RUN wget -O /usr/local/bin/faketime https://raw.githubusercontent.com/rustybird/realfaketime/main/faketime
+
 RUN useradd -m user

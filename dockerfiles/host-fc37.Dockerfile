@@ -26,4 +26,6 @@ RUN dnf -y --best --allowerasing update && \
     dnf -y install reprotest && \
     dnf -y clean all
 
+RUN wget -O /usr/local/bin/faketime https://raw.githubusercontent.com/rustybird/realfaketime/main/faketime
+
 RUN useradd -m user

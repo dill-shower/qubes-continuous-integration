@@ -17,4 +17,5 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-qubes-4.2-primary\n\
 gpgcheck=1\n\
 repo_gpgcheck = 1\n\
 '\ >> /etc/yum.repos.d/qubes.repo
+RUN wget -O /usr/local/bin/faketime https://raw.githubusercontent.com/rustybird/realfaketime/main/faketime
 RUN useradd -m user
