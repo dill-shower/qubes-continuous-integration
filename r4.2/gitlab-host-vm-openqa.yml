@@ -5,5 +5,5 @@ r4.2:publish:repo:
     - r4.2:build:host-fc37
     - r4.2:build:vm-bullseye
     - r4.2:build:vm-bookworm
-    - r4.2:build:vm-fc37
     - r4.2:build:vm-fc38
+    - r4.2:build:vm-fc39
