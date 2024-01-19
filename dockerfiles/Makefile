@@ -2,6 +2,7 @@ DOCKER_IMAGES_DIR=$(shell readlink -m $(dir $(abspath $(lastword $(MAKEFILE_LIST
 
 DOCKER_IMAGES ?= \
 	host-fc37 \
+	vm-trixie \
 	vm-bookworm \
 	vm-bullseye \
 	vm-archlinux \
