@@ -19,6 +19,9 @@ fi
 if [ -n "$DEFAULT_TEMPLATE" ]; then
   echo ", \"DEFAULT_TEMPLATE\": \"$DEFAULT_TEMPLATE\"" >> params.txt
 fi
+if [ -n "$FLAVOR" ]; then
+  echo ", \"FLAVOR\": \"$FLAVOR\"" >> params.txt
+fi
 echo "}" >> params.txt
 
 curl -f --header "JOB-TOKEN: $CI_JOB_TOKEN" --header "Content-type: application/json" \
