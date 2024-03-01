@@ -22,6 +22,9 @@ fi
 if [ -n "$FLAVOR" ]; then
   echo ", \"FLAVOR\": \"$FLAVOR\"" >> params.txt
 fi
+if [ -n "$KERNEL_VERSION" ]; then
+  echo ", \"KERNEL_VERSION\": \"$KERNEL_VERSION\"" >> params.txt
+fi
 echo "}" >> params.txt
 
 curl -f --header "JOB-TOKEN: $CI_JOB_TOKEN" --header "Content-type: application/json" \
