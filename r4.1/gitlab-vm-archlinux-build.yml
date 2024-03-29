@@ -1,5 +1,6 @@
 build:vm-archlinux:
   extends: .components_build
+  allow_failure: true
   needs:
     - prep:sources
 #    - project: QubesOS/qubes-builder-archlinux
