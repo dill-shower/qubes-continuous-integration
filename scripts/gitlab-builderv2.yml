@@ -1,7 +1,7 @@
 include:
  - example-configs/qubes-os-r4.2.yml
 
-+git:
+git:
   branch: main
 
 backend-vmm: xen
