@@ -5,5 +5,6 @@ r4.2:build:vm-bookworm:
 
 r4.2:build:vm-trixie:
   extends: .r4.2_components_build
+  allow_failure: true
   needs:
     - r4.2:prep:sources
