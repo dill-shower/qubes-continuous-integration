@@ -45,7 +45,7 @@ def main(qubes_distribution: QubesDistribution, repository: Path):
         )
     elif qubes_distribution.fullname == "archlinux":
         pkgext = "pkg.tar.zst"
-        run_cmd = "pacman -Sy  && pacman -U --noconfirm"
+        run_cmd = "pacman -Sy --noprogressbar  && pacman -U --noconfirm --noprogressbar"
     else:
         raise CIError("Unsupported distribution!")
 
