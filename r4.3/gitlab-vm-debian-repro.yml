@@ -1,0 +1,5 @@
+r4.3:repro:vm-bookworm:
+  extends: .r4.3_components_repro
+  needs:
+    - r4.3:prep:sources
+    - r4.3:build:vm-bookworm

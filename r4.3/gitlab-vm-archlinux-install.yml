@@ -1,0 +1,5 @@
+r4.3:install:vm-archlinux:
+  extends: .r4.3_components_install
+  needs:
+    - r4.3:prep:sources
+    - r4.3:build:vm-archlinux

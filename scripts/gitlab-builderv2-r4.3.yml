@@ -1,0 +1,91 @@
+include:
+ - example-configs/qubes-os-r4.3.yml
+
+git:
+  branch: main
+  maintainers:
+    # marmarek
+    - '0064428F455451B3EBE78A7F063938BA42CFA724'
+    # simon
+    - '274E12AB03F2FE293765FC06DA0434BC706E1FCF'
+
+
+backend-vmm: xen
+
+debug: true
+verbose: true
+
+reuse-fetched-source: true
+skip-git-fetch: true
+increment-devel-versions: true
+
+repository-publish:
+  components: current-testing
+  templates: templates-community-testing
+
+use-qubes-repo:
+  version: 4.3
+  testing: true
+
++components:
+  - builder-archlinux:
+      packages: false
+      branch: main
+
+distributions:
+  - host-fc37
+  - vm-bookworm
+  - vm-trixie
+  - vm-fc39
+  - vm-fc40
+  - vm-archlinux
+  - vm-jammy
+
++templates:
+  - fedora-40:
+      dist: fc40
+      options:
+        - selinux
+  - fedora-40-minimal:
+      dist: fc40
+      flavor: minimal
+  - debian-12:
+      dist: bookworm
+      options:
+        - gnome
+        - firmware
+  - debian-12-minimal:
+      dist: bookworm
+      flavor: minimal
+      options:
+      - no-recommends
+  - debian-12-xfce:
+      dist: bookworm
+      flavor: xfce
+      options:
+        - standard
+        - firmware
+  - archlinux:
+      dist: archlinux
+
+executor:
+  type: docker
+  options:
+    image: "qubes-builder-fedora:latest"
+
+stages:
+  - fetch
+  - prep
+  - pre
+  - build
+  - post
+  - verify
+  - sign:
+      executor:
+        type: local
+  - publish:
+      executor:
+        type: local
+  - upload:
+      executor:
+        type: local

@@ -1,0 +1,6 @@
+r4.3:repro:vm-fc40:
+  extends: .r4.3_components_repro
+  needs:
+    - r4.3:prep:sources
+    - r4.3:build:vm-fc40
+  allow_failure: true

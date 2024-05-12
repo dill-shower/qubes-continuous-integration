@@ -1,0 +1,9 @@
+#r4.3:build:vm-focal:
+#  extends: .r4.3_components_build
+#  needs:
+#    - r4.3:prep:sources
+
+r4.3:build:vm-jammy:
+  extends: .r4.3_components_build
+  needs:
+    - r4.3:prep:sources
