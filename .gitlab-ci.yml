@@ -4,7 +4,7 @@ include:
   - '/r4.2/gitlab-host-vm-openqa.yml'
   - '/r4.2/gitlab-vm-fedora-build.yml'
   - '/r4.2/gitlab-vm-debian-build.yml'
-#  - '/r4.2/gitlab-vm-archlinux-build.yml'
+  - '/r4.2/gitlab-vm-archlinux-build.yml'
 
 workflow:
   rules:

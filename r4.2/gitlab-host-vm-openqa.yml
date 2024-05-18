@@ -6,3 +6,4 @@ r4.2:publish:repo:
     - r4.2:build:vm-bookworm
     - r4.2:build:vm-fc39
     - r4.2:build:vm-fc40
+    - r4.2:build:vm-archlinux
