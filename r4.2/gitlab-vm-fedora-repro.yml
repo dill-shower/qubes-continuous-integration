@@ -9,5 +9,12 @@ r4.2:repro:vm-fc39:
   extends: .r4.2_components_repro
   needs:
     - r4.2:prep:sources
-    - r4.2:build:vm-fc38
+    - r4.2:build:vm-fc39
+  allow_failure: true
+
+r4.2:repro:vm-fc40:
+  extends: .r4.2_components_repro
+  needs:
+    - r4.2:prep:sources
+    - r4.2:build:vm-fc40
   allow_failure: true
