@@ -91,6 +91,20 @@ EOF
     fi
 }
 
+handle_arch_repo() {
+    local sourcedir="$1"
+    local destdir="$2"
+
+    mkdir -p "$destdir/pkgs"
+    pushd "$destdir" || exit
+    find "$sourcedir" -name '*.pkg.tar.*' -exec cp -t "$destdir/pkgs" {} +
+    find . -name '*.pkg.tar.*' -exec gpg --digest-algo=SHA256 -abs -u "$signkey" --output={}.sig {} \;
+    find . -name '*.pkg.tar.*' ! -name '*.sig' -exec repo-add pkgs/qubes-test.db.tar.gz {} \;
+    gpg -asb --output=pkgs/qubes-test.db.tar.gz.sig "--local-user=$signkey" \
+        "pkgs/qubes-test.db.tar.gz"
+    popd || exit
+}
+
 mkdir -p "$outdir"
 
 for sourcedir in "$indir"/*; do
@@ -105,6 +119,8 @@ for sourcedir in "$indir"/*; do
         handle_rpm_repo "$sourcedir" "$outdir/host"
     elif [[ "${dist}" = "fc"* ]]; then
         handle_rpm_repo "$sourcedir" "$outdir/vm/$dist"
+    elif [[ "${dist}" = "archlinux" ]]; then
+        handle_arch_repo "$sourcedir" "$outdir/vm/$dist"
     else
         # not fedora -> debian
         handle_deb_repo "$sourcedir" "$outdir/vm" "$dist"
