@@ -1,0 +1,9 @@
+.lint:
+  stage: test
+  image: fedora:latest
+  tags:
+    - docker
+  before_script:
+    - sudo dnf install -y python3-black
+  variables:
+    BLACK_ARGS: -l80 -v --diff --color --check
