@@ -1,5 +1,5 @@
 .lint:
-  stage: test
+  stage: checks
   image: fedora:latest
   tags:
     - docker
