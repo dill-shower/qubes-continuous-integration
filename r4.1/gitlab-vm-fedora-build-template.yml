@@ -1,13 +1,3 @@
-build:vm-fc38:
-  extends: .components_build
-  needs:
-    - prep:sources
-    - chroot:vm-fc38
-  variables:
-    DISTS_VM: fc38
-    USE_QUBES_REPO_VERSION: "4.1"
-    USE_QUBES_REPO_TESTING: "1"
-
 build:vm-fc39:
   extends: .components_build
   needs:

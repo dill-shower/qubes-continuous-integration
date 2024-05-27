@@ -8,8 +8,6 @@ DOCKER_IMAGES ?= \
 	vm-archlinux \
 	vm-centos-stream8 \
 	vm-jammy \
-	vm-fc37 \
-	vm-fc38 \
 	vm-fc39 \
 	vm-fc40
 

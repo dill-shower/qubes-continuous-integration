@@ -5,5 +5,4 @@ publish:repo:
     - build:dom0-fc32
     - build:vm-bullseye
     - build:vm-bookworm
-    - build:vm-fc38
     - build:vm-fc39
