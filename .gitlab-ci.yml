@@ -1,10 +1,10 @@
 include:
-  - '/r4.2/gitlab-base.yml'
-  - '/r4.2/gitlab-host-build.yml'
-  - '/r4.2/gitlab-host-vm-openqa.yml'
-  - '/r4.2/gitlab-vm-fedora-build.yml'
-  - '/r4.2/gitlab-vm-debian-build.yml'
-  - '/r4.2/gitlab-vm-archlinux-build.yml'
+  - '/r4.3/gitlab-base.yml'
+  - '/r4.3/gitlab-host-build.yml'
+  - '/r4.3/gitlab-host-vm-openqa.yml'
+  - '/r4.3/gitlab-vm-fedora-build.yml'
+  - '/r4.3/gitlab-vm-debian-build.yml'
+  - '/r4.3/gitlab-vm-archlinux-build.yml'
 
 workflow:
   rules:
@@ -25,8 +25,8 @@ variables:
   DEFAULT_TEMPLATE:
     description: "Template to set as default, can be abbreviated like 'debian' for latest Debian version"
 
-r4.2:prep:sources:
-  extends: .r4.2_components_prepare
+r4.3:prep:sources:
+  extends: .r4.3_components_prepare
   artifacts:
     expire_in: 1 day
     paths:
@@ -46,8 +46,8 @@ publish:openqa:
     - docker
   needs:
     # for pull-requests.txt
-    - r4.2:prep:sources
-    - r4.2:publish:repo
+    - r4.3:prep:sources
+    - r4.3:publish:repo
   stage: publish
   script:
     - ./scripts/start-openqa-repo
