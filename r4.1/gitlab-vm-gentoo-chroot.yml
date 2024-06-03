@@ -1,8 +1,7 @@
 chroot:vm-gentoo:
   extends: .chroot_prepare
   tags:
-    - vm
-    - long-living-job
+    - vm-kvm
   needs:
     - prep:sources
   variables:
@@ -13,8 +12,7 @@ chroot:vm-gentoo:
 # chroot:vm-gentoo-minimal:
 #   extends: .chroot_prepare
 #   tags:
-#     - vm
-#     - long-living-job
+#     - vm-kvm
 #   needs:
 #     - prep:sources
 #   variables:
@@ -25,8 +23,7 @@ chroot:vm-gentoo:
 # chroot:vm-gentoo-xfce:
 #   extends: .chroot_prepare
 #   tags:
-#     - vm
-#     - long-living-job
+#     - vm-kvm
 #   needs:
 #     - prep:sources
 #   variables:

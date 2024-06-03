@@ -1,7 +1,7 @@
 chroot:vm-archlinux:
   extends: .chroot_prepare
   tags:
-    - vm
+    - vm-kvm
   needs:
     - prep:sources
   variables:

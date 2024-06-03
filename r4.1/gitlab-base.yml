@@ -11,7 +11,7 @@ workflow:
 default:
   image: fepitre/qubesos-ci:latest
   tags:
-    - vm
+    - vm-kvm
 
 stages:
   - sources
@@ -49,7 +49,7 @@ stages:
 .chroot_prepare:
   # we enforce tags to not override it
   tags:
-    - vm
+    - vm-kvm
   artifacts:
     expire_in: 30 days
     when: always
@@ -185,7 +185,7 @@ prep:sources:
 .fullbuild_components_job:
   extends: .components_build
   tags:
-    - vm
+    - vm-kvm
   stage: components
   before_script:
     - tar xf $CI_PROJECT_DIR/qubes-builder.tar.xz -C ~/
@@ -201,7 +201,7 @@ prep:sources:
 .fullbuild_template_job:
   extends: .components_build
   tags:
-    - vm
+    - vm-kvm
   stage: template
   before_script:
     - tar xf $CI_PROJECT_DIR/qubes-builder.tar.xz -C ~/

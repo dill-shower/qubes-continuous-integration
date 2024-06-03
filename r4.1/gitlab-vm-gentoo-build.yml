@@ -12,7 +12,6 @@ build:vm-gentoo:
 #      artifacts: true
   tags:
     - docker
-    - long-living-job
   variables:
     DISTS_VM: gentoo
   allow_failure: true
@@ -31,7 +30,6 @@ build:vm-gentoo:
 # #      artifacts: true
 #   tags:
 #     - docker
-#     - long-living-job
 #   variables:
 #     DISTS_VM: gentoo+minimal
 #   allow_failure: true
@@ -50,7 +48,6 @@ build:vm-gentoo:
 # #      artifacts: true
 #   tags:
 #     - docker
-#     - long-living-job
 #   variables:
 #     DISTS_VM: gentoo+xfce
 #   allow_failure: true
