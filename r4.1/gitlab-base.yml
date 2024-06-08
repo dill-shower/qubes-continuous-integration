@@ -74,6 +74,9 @@ stages:
     - tar cJf $CI_PROJECT_DIR/build-logs.tar.xz --strip-components=1 -C ~/qubes-builder build-logs
 
 .components_build:
+  # we enforce tags to not override it
+  tags:
+    - vm-kvm
   artifacts:
     expire_in: 1 day
     when: always
