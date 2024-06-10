@@ -17,6 +17,8 @@ components=""
 
 cd "$BUILDER_INSTANCE" || exit 1
 
+prs_details=()
+
 for pr in $prs; do
     pr_short="${pr#${BASE_URL}}"
     pr_component="${pr_short%%/*}"
@@ -36,6 +38,8 @@ for pr in $prs; do
 
     ./qb "${qb_opts[@]}" -c "${pr_component}" package fetch
     git -C "artifacts/sources/${pr_component}" fetch $BASE_URL$pr_component refs/pull/$pr_number/head
+    commitid=$(git -C "artifacts/sources/${pr_component}" show -q --format=%H FETCH_HEAD)
+    prs_details+=( "$pr/commits/$commitid" )
     git -C "artifacts/sources/${pr_component}" merge --no-edit --no-ff FETCH_HEAD || { echo "Merge conflict on $pr"; exit 1; }
     # fetch new tarballs if necessary
     ./qb "${qb_opts[@]}" -c "${pr_component}" package fetch
@@ -51,4 +55,4 @@ echo "components post: $(echo $components)"
 
 printf "components:\n" >> $BUILDER_INSTANCE/builder.yml
 printf -- '- %s\n' $components >> $BUILDER_INSTANCE/builder.yml
-echo $prs > "$CI_PROJECT_DIR/pull-requests.txt"
+echo "${prs_details[@]}" > "$CI_PROJECT_DIR/pull-requests.txt"
