@@ -18,5 +18,5 @@ cd "$builder_dir"
 # Run all stages
 ./qb -t "${template}" template prep build
 
-mkdir -p artifacts/repository
-find artifacts/repository -type f -ls -exec sha1sum {} +
+mkdir -p artifacts/templates
+find artifacts/templates -type f -ls -exec sha1sum {} +
