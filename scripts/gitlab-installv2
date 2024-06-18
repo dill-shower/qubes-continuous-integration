@@ -32,13 +32,13 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
         pkgext = "rpm"
         repo_name = f"{qubes_distribution.package_set}-{release}"
         run_cmd = (
-            f"sed -e 's/4\.2/{release}/g ' /etc/yum.repos.d/qubes.repo && "
+            f"sed -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/qubes.repo && "
             "dnf -y update && dnf -y --allowerasing install"
         )
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
         pkgext = "deb"
         run_cmd = (
-            f"sed -e 's/4\.2/{release}/g ' /etc/apt/sources.list && "
+            f"sed -e 's/4\\.2/{release}/g ' /etc/apt/sources.list && "
             "apt update && env; apt-get -o 'Dpkg::Options::=--force-confnew' -y install"
         )
         environment.update(
@@ -51,7 +51,7 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
     elif qubes_distribution.fullname == "archlinux":
         pkgext = "pkg.tar.zst"
         run_cmd = (
-            f"sed -e 's/4\.2/{release}/g ' /etc/pacman.conf && "
+            f"sed -e 's/4\\.2/{release}/g ' /etc/pacman.conf && "
             "pacman -Sy --noprogressbar  && pacman -U --noconfirm --noprogressbar"
         )
     else:
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         print("usage: repository_dir qubes_release qubes_distribution")
         sys.exit(1)
     try:
-        release = argv[2]
+        release = sys.argv[2]
         dist = QubesDistribution(sys.argv[3])
         repository_path = Path(sys.argv[1]).expanduser().resolve() / dist.distribution
         main(dist, release, repository_path)
