@@ -32,13 +32,13 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
         pkgext = "rpm"
         repo_name = f"{qubes_distribution.package_set}-{release}"
         run_cmd = (
-            f"sed -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/qubes.repo && "
+            f"sed -i -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/qubes.repo && "
             "dnf -y update && dnf -y --allowerasing install"
         )
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
         pkgext = "deb"
         run_cmd = (
-            f"sed -e 's/4\\.2/{release}/g ' /etc/apt/sources.list && "
+            f"sed -i -e 's/4\\.2/{release}/g ' /etc/apt/sources.list && "
             "apt update && env; apt-get -o 'Dpkg::Options::=--force-confnew' -y install"
         )
         environment.update(
@@ -51,7 +51,7 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
     elif qubes_distribution.fullname == "archlinux":
         pkgext = "pkg.tar.zst"
         run_cmd = (
-            f"sed -e 's/4\\.2/{release}/g ' /etc/pacman.conf && "
+            f"sed -i -e 's/4\\.2/{release}/g ' /etc/pacman.conf && "
             "pacman -Sy --noprogressbar  && pacman -U --noconfirm --noprogressbar"
         )
     else:
