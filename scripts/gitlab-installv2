@@ -99,7 +99,7 @@ if __name__ == "__main__":
         release = sys.argv[2]
         dist = QubesDistribution(sys.argv[3])
         repository_path = Path(sys.argv[1]).expanduser().resolve() / dist.distribution
-        main(dist, release, repository_path)
+        main(release, dist, repository_path)
     except Exception as e:
         print(str(e))
         sys.exit(1)
