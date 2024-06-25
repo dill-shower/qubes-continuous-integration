@@ -7,7 +7,6 @@ workflow:
 .website:
   tags:
     - docker
-    - short-living-job
   stage: build
   artifacts:
     expire_in: 1 day
