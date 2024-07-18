@@ -84,7 +84,7 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
         print("Nothing to install!")
         return
 
-    cmd = [f"{run_cmd} /repository/*.{pkgext}"]
+    cmd = [f"set -o pipefail; {run_cmd} /repository/*.{pkgext} | cat"]
     executor = ContainerExecutor("docker", container_image)
     executor.run(
         cmd, copy_in=copy_in, override_container_cmd=True, environment=environment
