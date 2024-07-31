@@ -5,9 +5,9 @@ import sys
 from pathlib import Path, PurePath
 from qubesbuilder.distribution import QubesDistribution
 from qubesbuilder.executors.container import ContainerExecutor
-from qubesbuilder.log import init_logging
+from qubesbuilder.log import init_logger, get_logger
 
-init_logging(level="DEBUG")
+init_logger(verbose=True)
 
 
 class CIError(Exception):
@@ -86,6 +86,7 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
 
     cmd = [f"set -o pipefail; {run_cmd} /repository/*.{pkgext} | cat"]
     executor = ContainerExecutor("docker", container_image)
+    executor.log = get_logger("gitlab-install")
     executor.run(
         cmd, copy_in=copy_in, override_container_cmd=True, environment=environment
     )
