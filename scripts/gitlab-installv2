@@ -9,6 +9,7 @@ from qubesbuilder.log import init_logger, get_logger
 
 init_logger(verbose=True)
 
+logger = get_logger("gitlab-installv2")
 
 class CIError(Exception):
     pass
@@ -81,12 +82,12 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
         copy_in.append((pkg, PurePath("/repository")))
 
     if not packages:
-        print("Nothing to install!")
+        logger.debug("Nothing to install!")
         return
 
     cmd = [f"set -o pipefail; {run_cmd} /repository/*.{pkgext} | cat"]
     executor = ContainerExecutor("docker", container_image)
-    executor.log = get_logger("gitlab-install")
+    executor.log = logger
     executor.run(
         cmd, copy_in=copy_in, override_container_cmd=True, environment=environment
     )
@@ -94,7 +95,7 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        print("usage: repository_dir qubes_release qubes_distribution")
+        logger.debug("usage: repository_dir qubes_release qubes_distribution")
         sys.exit(1)
     try:
         release = sys.argv[2]
@@ -102,5 +103,5 @@ if __name__ == "__main__":
         repository_path = Path(sys.argv[1]).expanduser().resolve() / dist.distribution
         main(release, dist, repository_path)
     except Exception as e:
-        print(str(e))
+        logger.error(str(e))
         sys.exit(1)
