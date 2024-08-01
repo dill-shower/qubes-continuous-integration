@@ -31,9 +31,11 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
     environment = {}
     if qubes_distribution.fullname in ("fedora", "centos-stream"):
         pkgext = "rpm"
-        repo_name = f"{qubes_distribution.package_set}-{release}"
+        pkgset = qubes_distribution.package_set
+        if pkgset == "host":
+            pkgset = "dom0"
         run_cmd = (
-            f"sed -i -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/qubes.repo && "
+            f"sed -i -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/qubes-{pkgset}.repo && "
             "dnf -y update && dnf -y --allowerasing install"
         )
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
