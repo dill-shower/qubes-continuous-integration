@@ -41,6 +41,7 @@ for pr in $prs; do
     commitid=$(git -C "artifacts/sources/${pr_component}" show -q --format=%H FETCH_HEAD)
     prs_details+=( "$pr/commits/$commitid" )
     git -C "artifacts/sources/${pr_component}" merge --no-edit --no-ff FETCH_HEAD || { echo "Merge conflict on $pr"; exit 1; }
+    git -C "artifacts/sources/${pr_component}" submodule update --init || { echo "Failed to refresh submodules after merging $pr"; exit 1; }
     # fetch new tarballs if necessary
     ./qb "${qb_opts[@]}" -c "${pr_component}" package fetch
     components="$components $pr_component"
