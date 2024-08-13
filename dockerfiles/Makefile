@@ -9,7 +9,8 @@ DOCKER_IMAGES ?= \
 	vm-centos-stream8 \
 	vm-jammy \
 	vm-fc39 \
-	vm-fc40
+	vm-fc40 \
+	vm-fc41
 
 .ONESHELL:
 build: $(DOCKER_IMAGES:%=build-%)
