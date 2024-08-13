@@ -38,6 +38,7 @@ distributions:
   - vm-trixie
   - vm-fc39
   - vm-fc40
+  - vm-fc41
   - vm-archlinux
   - vm-jammy
 
