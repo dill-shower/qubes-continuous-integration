@@ -38,6 +38,9 @@ def main(release: str, qubes_distribution: QubesDistribution, repository: Path):
             f"sed -i -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/{repofile} && "
             "dnf -y update && dnf -y --allowerasing install"
         )
+        # dnf5 doesn't support --allowerasing (yet?)
+        if int(qubes_distribution.version) >= 41:
+            run_cmd = run_cmd.replace(" --allowerasing", "")
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
         pkgext = "deb"
         run_cmd = (
