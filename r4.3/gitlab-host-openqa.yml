@@ -2,4 +2,4 @@ r4.3:publish:repo:
   extends: .r4.3_openqa_repo
   needs:
     - r4.3:prep:sources
-    - r4.3:build:host-fc37
+    - r4.3:build:host-fc41

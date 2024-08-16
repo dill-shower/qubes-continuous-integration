@@ -33,7 +33,7 @@ use-qubes-repo:
       branch: main
 
 distributions:
-  - host-fc37
+  - host-fc41
   - vm-bookworm
   - vm-trixie
   - vm-fc39
