@@ -50,6 +50,18 @@ distributions:
   - fedora-40-minimal:
       dist: fc40
       flavor: minimal
+  - fedora-41:
+      dist: fc41
+      options:
+        - selinux
+  - fedora-41-xfce:
+      dist: fc41
+      flavor: xfce
+      options:
+        - selinux
+  - fedora-41-minimal:
+      dist: fc41
+      flavor: minimal
   - debian-12:
       dist: bookworm
       options:
