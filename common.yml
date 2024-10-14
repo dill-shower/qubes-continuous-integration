@@ -11,4 +11,4 @@
     - if [ -n "$PYREQUIREMENTS" ]; then pip3 install --quiet -r "$PYREQUIREMENTS"; fi
   script:
     - black $BLACK_ARGS ${DIR:-.}
-    - if [ -e .pylintrc ] && [ "${SKIP_PYLINT} != "1" ]; then pylint-3 $PYLINT_ARGS ${DIR:-.}; fi
+    - if [ -e .pylintrc ] && [ "${SKIP_PYLINT}" != "1" ]; then pylint-3 $PYLINT_ARGS ${DIR:-.}; fi
