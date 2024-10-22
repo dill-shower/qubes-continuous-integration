@@ -23,7 +23,7 @@ repo_gpgcheck = 1\n\
 
 RUN dnf -y --best --allowerasing update && \
     dnf config-manager --set-enabled qubes-dom0-current-testing && \
-    dnf -y install reprotest && \
+    dnf --exclude=libvirt-daemon-driver-network -y install reprotest && \
     dnf -y clean all
 
 RUN wget -O /usr/local/bin/faketime https://raw.githubusercontent.com/rustybird/realfaketime/main/faketime
