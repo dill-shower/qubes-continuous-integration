@@ -15,11 +15,18 @@ class CIError(Exception):
     pass
 
 
-def get_run_cmd(qubes_distribution: QubesDistribution, package, store_dir):
+def get_run_cmd(release: str, qubes_distribution: QubesDistribution, package, store_dir):
     if qubes_distribution.fullname in ("fedora", "centos-stream"):
-        run_cmd = f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host,-kernel,-build_path --testbed-build-pre 'dnf update -y; dnf builddep -y --best --allowerasing --skip-broken {package}' {package}"
+        repofile = "qubes.repo"
+        run_cmd = (
+            f"sed -i -e 's/4\\.2/{release}/g ' /etc/yum.repos.d/{repofile} && "
+            f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host,-kernel,-build_path --testbed-build-pre 'dnf update -y; dnf builddep -y --best --allowerasing --skip-broken {package}' {package}"
+        )
     elif qubes_distribution.fullname in ("debian", "ubuntu"):
-        run_cmd = f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host --testbed-build-pre 'apt-get update; apt-get -y --no-install-recommends build-dep {package}' {package}"
+        run_cmd = (
+            f"sed -i -e 's/4\\.2/{release}/g ' /etc/apt/sources.list && "
+            f"reprotest --store-dir {store_dir} --no-clean-on-error --vary=-domain_host --testbed-build-pre 'apt-get update; apt-get -y --no-install-recommends build-dep {package}' {package}"
+        )
     else:
         raise CIError("Unsupported distribution!")
     return run_cmd
@@ -35,7 +42,7 @@ def get_prefix(qubes_distribution: QubesDistribution, package):
     return prefix
 
 
-def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Path):
+def main(release: str, qubes_distribution: QubesDistribution, repository: Path, artifacts: Path):
     container_image = qubes_distribution.distribution
     environment = {}
     dependencies = []
@@ -74,7 +81,7 @@ def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Pat
         copy_out = [(store_dir, artifacts / dist.distribution)]
 
         cmd = [
-            get_run_cmd(qubes_distribution, f"/repository/{package.name}", store_dir)
+            get_run_cmd(release, qubes_distribution, f"/repository/{package.name}", store_dir)
         ]
 
         try:
@@ -102,13 +109,14 @@ def main(qubes_distribution: QubesDistribution, repository: Path, artifacts: Pat
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        logger.debug("usage: repository_dir artifacts_dir qubes_distribution")
+        logger.debug("usage: release repository_dir artifacts_dir qubes_distribution")
         sys.exit(1)
     try:
-        dist = QubesDistribution(sys.argv[3])
-        repository_path = Path(sys.argv[1]).expanduser().resolve()
-        artifacts_path = Path(sys.argv[2]).expanduser().resolve()
-        main(dist, repository_path, artifacts_path)
+        release = sys.argv[1]
+        dist = QubesDistribution(sys.argv[4])
+        repository_path = Path(sys.argv[2]).expanduser().resolve()
+        artifacts_path = Path(sys.argv[3]).expanduser().resolve()
+        main(release, dist, repository_path, artifacts_path)
     except Exception as e:
         logger.debug(str(e))
         sys.exit(1)
