@@ -23,7 +23,6 @@ repo_gpgcheck = 1\n\
 
 RUN dnf -y --best --allowerasing update && \
     dnf config-manager --set-enabled qubes-dom0-current-testing && \
-    rm -f /etc/yum.repos.d/qubes.repo && \
     dnf -y install reprotest && \
     dnf -y clean all
 
