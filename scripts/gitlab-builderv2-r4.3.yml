@@ -11,10 +11,7 @@ git:
 
 
 backend-vmm: xen
-
-debug: true
 verbose: true
-
 reuse-fetched-source: true
 skip-git-fetch: true
 increment-devel-versions: true
