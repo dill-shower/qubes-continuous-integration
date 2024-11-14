@@ -75,6 +75,7 @@ stages:
   after_script:
     - sudo rm -rf $CI_PROJECT_DIR/artifacts
     - mv ~/qubes-builder/artifacts $CI_PROJECT_DIR/
+    - find $CI_PROJECT_DIR/ -name '*.src.rpm' -delete
 
 .r4.2_components_install:
   artifacts:
