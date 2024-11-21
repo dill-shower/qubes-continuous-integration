@@ -43,6 +43,7 @@ distributions:
   - vm-archlinux
   - vm-focal
   - vm-jammy
+  - vm-noble
 
 +templates:
   - fedora-38:

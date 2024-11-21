@@ -38,6 +38,7 @@ distributions:
   - vm-fc41
   - vm-archlinux
   - vm-jammy
+  - vm-noble
 
 +templates:
   - fedora-40:
