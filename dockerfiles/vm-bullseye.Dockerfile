@@ -12,6 +12,7 @@ RUN wget -O /tmp/qubes-debian-r4.3.asc https://raw.githubusercontent.com/QubesOS
 RUN gpg --dearmor < /tmp/qubes-debian-r4.3.asc > /usr/share/keyrings/qubes-archive-keyring-4.3.gpg
 
 RUN wget -O /usr/local/bin/faketime https://raw.githubusercontent.com/rustybird/realfaketime/main/faketime
+RUN chmod +x /usr/local/bin/faketime
 
 # workaround mkinitramfs not seeing root dev in docker
 RUN mkdir -p /etc/initramfs-tools/conf.d && echo MODULES=list > /etc/initramfs-tools/conf.d/gitlab-ci.conf
