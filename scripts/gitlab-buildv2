@@ -39,6 +39,8 @@ read -r -a qb_opts <<< "${qb_opts}"
 if [ "$component_name" = "vmm-xen-unified" ]; then
     if [[ "$CI_RUNNER_TAGS" =~ "pesign" ]]; then
         qb_opts+=( -o +components+"$component_name":packages=true )
+        qb_opts+=( -o +components+"$component_name":stages+build:executor:type=qubes )
+        qb_opts+=( -o +components+"$component_name":stages+build:executor:options:dispvm=builder-dvm )
     fi
 fi
 
