@@ -165,7 +165,7 @@ r4.3:prep:sources:
     - tar xf $CI_PROJECT_DIR/qubes-builder.tar.xz -C ~/
   script:
     - cd ~/qubes-builder
-    - sudo dnf -y install rpm-sign
+    - sudo dnf -y install rpm-sign pacman
     - gpg --generate-key --batch < ./repo-key.gpgbatch
     - ./combine-and-sign-repo "$CI_PROJECT_DIR/artifacts/repository" "$CI_PROJECT_DIR/repo" TEST
     - gpg -a --export > "$CI_PROJECT_DIR/repo/key.pub"
