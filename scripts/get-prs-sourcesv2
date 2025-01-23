@@ -36,7 +36,11 @@ for pr in $prs; do
         continue
     fi
 
-    ./qb "${qb_opts[@]}" -o skip-files-fetch=true -c "${pr_component}" package fetch
+    ./qb "${qb_opts[@]}" \
+        -o skip-files-fetch=true \
+        -o +components+"${pr_component}":packages=false \
+        -c "${pr_component}"
+        package fetch
     git -C "artifacts/sources/${pr_component}" fetch $BASE_URL$pr_component refs/pull/$pr_number/head
     commitid=$(git -C "artifacts/sources/${pr_component}" show -q --format=%H FETCH_HEAD)
     prs_details+=( "$pr/commits/$commitid" )
