@@ -9,7 +9,7 @@ workflow:
     - when: never
 
 default:
-  image: fepitre/qubesos-ci:latest
+  image: registry.gitlab.com/qubesos/docker-images/qubesos-ci:latest
   tags:
     - vm
 
